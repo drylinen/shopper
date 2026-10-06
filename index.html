@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shopper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="color-scheme" content="dark light">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Defense-in-depth: page-level CSP and referrer policy (prefer headers on server) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="no-referrer">
+</head>
+<body>
+  <header class="app-header" aria-label="App header">
+    <h1 class="app-title">Shopper</h1>
+  </header>
+
+  <section class="toolbar" aria-label="Controls">
+    <button id="addCategoryBtn" class="btn" aria-label="Add a new category">
+      <img src="icon_new.png" alt="" aria-hidden="true" referrerpolicy="no-referrer">
+    </button>
+    <button id="toggleHideBtn" class="btn" aria-pressed="false" aria-label="Toggle visibility of unselected items">
+      <img src="icon_hide.png" alt="" aria-hidden="true" referrerpolicy="no-referrer">
+    </button>
+    <button id="resetSelectionBtn" class="btn" aria-label="Reset item selections">
+      <img src="icon_reset.png" alt="" aria-hidden="true" referrerpolicy="no-referrer">
+    </button>
+    <button id="resetBoardBtn" class="btn" aria-label="Remove all categories and items">
+      <img src="icon_delete.png" alt="" aria-hidden="true" referrerpolicy="no-referrer">
+    </button>
+  </section>
+
+  <main class="app-main" aria-label="Shopping list">
+    <div id="list" class="list" aria-live="polite"></div>
+  </main>
+
+  <!-- Reusable modal for creating/editing categories and items -->
+  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add</h2>
+      </div>
+      <div class="modal-body">
+        <form id="nameForm" novalidate>
+          <input type="hidden" id="modalKind" value="">
+          <input type="hidden" id="modalCategoryId" value="">
+          <input type="hidden" id="modalItemId" value="">
+          <div class="field">
+            <label for="nameInput">Name</label>
+            <input id="nameInput" type="text" placeholder="e.g. Vegetables or Milk" required aria-required="true" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="100">
+          </div>
+        </form>
+      </div>
+      <div class="modal-actions">
+        <button id="deleteBtn" class="btn red" aria-label="Delete" hidden>Delete</button>
+        <div class="spacer"></div>
+        <button id="cancelBtn" class="btn">Cancel</button>
+        <button id="saveBtn" class="btn primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

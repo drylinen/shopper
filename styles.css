@@ -1,0 +1,278 @@
+/* Base */
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #0d0f14;
+  color: #e5e7eb;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Header */
+.app-header {
+  background: #0d0f14;
+  color: #fff;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.app-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #9fb873;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 14px;
+  background: #0d0f14; /* same dark gray */
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.toolbar .btn {
+  border: 1px solid #c9c9c9;
+  background: #d1d5db;     /* light gray button bg */
+  color: #111;
+  padding: 10px 14px;       /* slightly larger touch target */
+}
+.toolbar .btn:hover { background: #e5e7eb; }
+.toolbar .btn img {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+.toolbar #toggleHideBtn[aria-pressed="true"] {
+  background: #0d0f14;   /* dark gray when active */
+  border-color: #c9c9c9;  /* keep light gray border */
+  color: #e5e7eb;
+}
+.toolbar #toggleHideBtn[aria-pressed="true"]:hover {
+  background: #232a36;
+}
+.toolbar #resetSelectionBtn,
+.toolbar #resetBoardBtn {
+  background: #ffc44d;
+  border-color: #ffc44d;
+  color: #111;
+}
+.toolbar #resetSelectionBtn:hover,
+.toolbar #resetBoardBtn:hover {
+  background: #ffe46d;
+}
+.btn {
+  appearance: none;
+  border: 1px solid #3a4150; /* lighter gray */
+  background: #2a303b;       /* lighter gray button bg */
+  color: #e5e7eb;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.btn:hover { background: #343b48; }
+.btn.primary {
+  background: #1976d2;
+  border-color: #1976d2;
+  color: #fff;
+}
+.btn.small {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 999px;
+}
+.btn.red {
+  background: #d32f2f;
+  border-color: #d32f2f;
+  color: #fff;
+}
+.btn.red:hover { background: #c62828; }
+.spacer { flex: 1; }
+
+/* Main area */
+.app-main {
+  background: #12151b; /* dark area for content */
+  min-height: calc(100dvh - 100px);
+  padding: 12px;
+}
+
+/* List structure */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.category {
+  background: #1a1f27;
+  border: 1px solid #2a303b;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.2), 0 3px 8px rgba(0,0,0,0.28);
+}
+.category.dragging { opacity: 0.7; }
+.category.drop-target { box-shadow: 0 0 0 3px rgba(30,136,229,0.35) inset; }
+
+.category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  background: #232a36; /* slightly lighter gray for header bar */
+  user-select: none;
+}
+.category-title {
+  font-weight: 700;
+  color: #e5e7eb;
+  font-size: 16px;
+}
+.category-header .actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.category-meta {
+  color: #9aa5b1;
+  font-size: 12px;
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;          /* responsive wrap */
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px 12px 12px;
+  min-height: 48px;         /* ensure at least one-row height when empty */
+}
+
+.category-handle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: #1a1f27;     /* dark gray */
+  color: #d1d5db;          /* near-white text */
+  border: 1px solid #3a4150;
+  min-width: 44px;
+  min-height: 34px;
+  line-height: 1;
+  cursor: grab;
+  user-select: none;
+}
+.category-handle:active { cursor: grabbing; }
+.category-handle.dragging { opacity: 0.75; }
+.category-handle img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: #2a303b;     /* dark pill */
+  color: #d1d5db;
+  border: 1px solid #3a4150;
+  min-width: 44px;
+  min-height: 34px;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+}
+.item:hover { background: #343b48; }
+.item.state-red {
+  background: #ef4444;     /* red */
+  color: #ffffff;
+  border-color: #ef4444;
+  font-weight: 700;
+}
+.item.state-blue {
+  background: #3b82f6;     /* blue */
+  color: #ffffff;
+  border-color: #3b82f6;
+  font-weight: 700;
+}
+.item.dragging { opacity: 0.7; }
+.item.drop-target { box-shadow: 0 0 0 3px rgba(245,158,11,0.35) inset; }
+.item.hidden { display: none !important; }
+
+/* Collapsed categories hide items section */
+.category.collapsed .items { display: none; }
+
+/* Modal (reused from dark style approach) */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 1000;
+}
+.modal.open { display: flex; }
+.modal-content {
+  background: #1a1f27;
+  color: #e5e7eb;
+  width: 480px;
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  overflow: hidden;
+  border: 1px solid #2a303b;
+}
+.modal-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.modal-body {
+  padding: 12px 16px;
+}
+.modal-actions {
+  padding: 12px 16px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+}
+.modal-actions .btn + .btn {
+  margin-left: 8px;
+}
+.field {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9aa5b1;
+}
+.field input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #3a4150;
+  background: #2a303b;
+  color: #e5e7eb;
+  font-size: 16px;
+}
+.field input::placeholder { color: #9aa5b1; }
+.field input:focus {
+  outline: none;
+  border-color: #1e88e5;
+}
+
+/* Responsive tweaks */
+@media (max-width: 520px) {
+  .toolbar { flex-wrap: wrap; }
+  .app-main { padding: 10px; }
+  .items { gap: 8px; }
+}
