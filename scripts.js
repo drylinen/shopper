@@ -206,13 +206,7 @@
     handle.className = 'category-handle';
     handle.setAttribute('aria-label', `Reorder ${category.name}`);
     handle.draggable = true;
-    // Handle icon
-    const handleImg = document.createElement('img');
-    handleImg.src = 'icon_drag.png';
-    handleImg.alt = '';
-    handleImg.setAttribute('aria-hidden', 'true');
-    try { handleImg.referrerPolicy = 'no-referrer'; } catch (_) { /* noop */ }
-    handle.appendChild(handleImg);
+    handle.textContent = '\u283F';
     // Prevent header interactions when using handle
     ['click','mousedown','touchstart'].forEach((evt) => {
       handle.addEventListener(evt, (e) => e.stopPropagation(), { passive: evt==='touchstart' });
