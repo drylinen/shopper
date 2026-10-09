@@ -18,9 +18,14 @@ html, body {
 }
 .app-title {
   margin: 0;
-  font-size: 22px;
-  font-weight: 700;
-  color: #9fb873;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #6cff9b, #1ed760);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 18px rgba(30, 215, 96, 0.25);
 }
 
 /* Toolbar */
@@ -39,10 +44,26 @@ html, body {
   padding: 10px 14px;       /* slightly larger touch target */
 }
 .toolbar .btn:hover { background: #e5e7eb; }
-.toolbar .btn img {
+.toolbar .toolbar-icon {
   width: 22px;
   height: 22px;
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  line-height: 1;
+}
+.toolbar #addCategoryBtn .toolbar-icon {
+  transform: translate(0px, 1px) scale(1.2);
+}
+.toolbar #resetSelectionBtn .toolbar-icon {
+  transform: translate(2px, -2px) scale(1.7);
+}
+.toolbar #toggleHideBtn .toolbar-icon {
+  transform: translate(-1px, 2px);
+}
+.toolbar #resetBoardBtn .toolbar-icon {
+  transform: translate(-1px, 1px) scale(0.9);
 }
 .toolbar #toggleHideBtn[aria-pressed="true"] {
   background: #0d0f14;   /* dark gray when active */
